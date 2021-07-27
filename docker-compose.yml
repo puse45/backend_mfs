@@ -1,0 +1,83 @@
+version: '3'
+
+services:
+  backend:
+    build: .
+    image: &backend backend
+    restart: unless-stopped
+    container_name: backend_server
+    volumes:
+      - .:/backend
+      - static_volume:/backend/static
+      - media_volume:/backend/media
+    command: ./wait-for-it.sh database:5432 -- gunicorn project.wsgi:application --workers 16 --timeout 150 --worker-class gevent --bind 0.0.0.0:8000
+    networks:
+      - mfs_network
+    env_file:
+      - ./.env.dev
+
+  nginx_mfs:
+    image: nginx:latest
+    restart: unless-stopped
+    container_name: nginx_mfs
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - ./config/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./config/nginx/ssl/mfs_africa.crt:/etc/nginx/mfs_africa.crt
+      - ./config/nginx/ssl/mfs_africa.key:/etc/nginx/mfs_africa.key
+      - ./config/nginx/ssl/mfs_africa.pem:/etc/nginx/mfs_africa.pem
+      - static_volume:/backend/static
+      - media_volume:/backend/media
+    depends_on:
+      - backend
+    networks:
+      - mfs_network
+
+  redis:
+    image: redis
+    container_name: redis_mfs
+    restart: on-failure
+    networks:
+      - mfs_network
+
+  database:
+      image: postgres:12
+      container_name: db_mfs
+      networks:
+        - mfs_network
+      volumes:
+        - database_volume:/var/lib/postgresql/data
+      environment:
+        - POSTGRES_DB=mfs_africa_db
+        - POSTGRES_USER=root
+        - POSTGRES_PASSWORD=your_password
+      restart: on-failure
+
+
+  celery:
+    image: *backend
+    container_name: celery_mfs
+    restart: on-failure
+    env_file:
+      - ./.env.dev
+    command: ./wait-for-it.sh redis:8000 -- celery -A project worker -l info
+    volumes:
+      - .:/celery_volume
+    networks:
+      - mfs_network
+    depends_on:
+      - backend
+      - redis_cts
+
+
+networks:
+  mfs_network:
+    driver: bridge
+
+volumes:
+  static_volume:
+  media_volume:
+  celery_volume:
+  database_volume:

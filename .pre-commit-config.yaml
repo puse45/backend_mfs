@@ -1,0 +1,27 @@
+default_language_version:
+  python: python3.8
+minimum_pre_commit_version: 2.9.2
+repos:
+  - repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+      - id: black
+        args: [ --safe, --quiet ]
+  - repo: https://github.com/timothycrosley/isort
+    rev: 5.7.0
+    hooks:
+      - id: isort
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+      - id: check-json
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-ast
+      - id: name-tests-test
+        args: [ --django ]
+  - repo: https://github.com/pycqa/pylint
+    rev: pylint-2.7.2
+    hooks:
+      - id: pylint
+        additional_dependencies: [ celery, django, pylint-django ]

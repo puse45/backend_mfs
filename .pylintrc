@@ -1,0 +1,277 @@
+# Pylint settings at:
+# http://pylint.pycqa.org/en/latest/technical_reference/features.html
+
+[MASTER]
+profile = no
+persistent = no
+ignore = codegen
+
+[IMPORTS]
+deprecated-modules=ujson
+
+[VARIABLES]
+# Tells whether we should check for unused import in __init__ files.
+init-import=no
+
+[MESSAGES CONTROL]
+# enable = C0112 # Empty %s docstring
+# enable = C0303 # Trailing whitespace
+# enable = C0304 # Final newline missing
+# enable = E0001 # %s syntax-error
+# enable = E0012 # Bad option value %r
+# enable = E0101 # Explicit return in __init__
+# enable = E0102 # %s already defined line %s
+# enable = E0103 # %r not properly in loop
+# enable = E0104 # Return outside function
+# enable = E0105 # Yield outside function
+# enable = E0108 # Duplicate argument name %s in function definition
+# enable = E0203 # Access to member %r before its definition line %s
+# enable = E0211 # Method has no argument
+# enable = E0222 # Missing method %r from %s interface
+# enable = E0235 # __exit__ must accept 3 arguments: type, value, traceback
+# enable = E0601 # Using variable %r before assignment
+# enable = E0602 # Undefined variable %r
+# enable = E0603 # Undefined variable name %r in __all__
+# enable = E0604 # Invalid object %r in __all__, must contain only strings
+# enable = E0611 # No name %r in module %r
+# enable = E0701 # Bad except clauses order (%s)
+# enable = E0711 # NotImplemented raised - should raise NotImplementedError
+# enable = E1003 # Bad first argument %r given to super()
+# enable = E1102 # %s is not callable
+# enable = E1111 # Assigning to function call which doesn't return
+# enable = E1121 # Too many positional arguments for %s call
+# enable = E1123 # Passing unexpected keyword argument %r in function call
+# enable = E1124 # Parameter %r passed as both positional and keyword argument
+# enable = E1200 # Unsupported logging format character
+# enable = E1201 # Logging format string ends in middle of conversion specifier
+# enable = E1205 # Too many arguments for logging format string
+# enable = E1206 # Not enough arguments for logging format string
+# enable = E1304 # Missing key %r in format string dictionary
+# enable = E1305 # Too many arguments for format string
+# enable = E1306 # Not enough arguments for format string
+# enable = I0022 # Pragma "%s" is deprecated, use "%s" instead
+# enable = F0010 # error while code parsing: %s
+# enable = W0101 # Unreachable code
+# enable = W0102 # Dangerous default value %s as argument
+# enable = W0104 # Statement seems to have no effect
+# enable = W0106 # Expression "%s" is assigned to nothing
+# enable = W0109 # Duplicate key %r in dictionary
+# enable = W0122 # Use of exec
+# enable = W0123 # Use of eval
+# enable = W0199 # Assert called on a 2-uple. Did you mean ‘assert x,y’?
+# enable = W0301 # Unnecessary semicolon
+# enable = W0311 # Bad indentation. Found %s %s, expected %s
+# enable = W0312 # Found indentation with %ss instead of %ss [tabs]
+# enable = W0332 # Use of "l" as long integer identifier
+# enable = W0402 # use of a deprecated module
+# enable = W0601 # Global variable %r undefined at the module level
+# enable = W0611 # Unused %s imported from %s (unused-import)
+# enable = W0612 # Unused variable %r
+# enable = W0631 # Using possibly undefined loop variable %r
+# enable = W0633 # Attempting to unpack a non-sequence%s
+# enable = W1111 # Assigning to function call which only returns None
+# enable = W1201 # Use %s formatting in logging functions
+# enable = W1301 # Unused key %r in format string dictionary
+# enable = W1501 # "%s" is not a valid mode for open.
+
+# Python 3 Compatibility Linter
+# enable = E1601 # print statement used
+# enable = E1602 # Parameter unpacking specified'
+# enable = E1603 # Implicit unpacking of exceptions is not supported
+# enable = E1604 # Use raise ErrorClass(args)
+# enable = E1605 # Use of the `` operator'
+# enable = E1606 # Use of long suffix
+# enable = E1607 # Use of the <> operator
+# enable = E1608 # Use of old octal literal
+# enable = E1609 # Import * only allowed at module level
+# enable = E1610 # Non-ascii bytes literals not supported in 3.x
+# enable = W0410 # __future__ import is not the first non docstring statement
+# enable = W1601 # apply built-in referenced
+# enable = W1602 # basestring built-in referenced
+# enable = W1603 # buffer built-in referenced
+# enable = W1604 # cmp built-in referenced
+# enable = W1605 # coerce built-in referenced
+# enable = W1606 # execfile built-in referenced
+# enable = W1607 # file built-in referenced
+# enable = W1608 # long built-in referenced
+# enable = W1609 # raw_input built-in referenced
+# enable = W1610 # reduce built-in referenced
+# enable = W1611 # StandardError built-in referenced
+# enable = W1612 # unicode built-in referenced
+# enable = W1613 # xrange built-in referenced
+# enable = W1614 # __coerce__ method defined
+# enable = W1615 # __delslice__ method defined
+# enable = W1616 # __getslice__ method defined
+# enable = W1617 # __setslice__ method defined
+# enable = W1618 # import missing `from __future__ import absolute_import`
+# enable = W1619 # division w/o __future__ statement
+# enable = W1620 # Calling a dict.iter*() method
+# enable = W1621 # Calling a dict.view*() method
+# enable = W1622 # Called a next() method on an object
+# enable = W1623 # Assigning to a class's __metaclass__ attribute
+# enable = W1624 # Indexing exceptions will not work on Python 3
+# enable = W1625 # Raising a string exception
+# enable = W1626 # reload built-in referenced
+# enable = W1627 # __oct__ method defined
+# enable = W1628 # __hex__ method defined
+# enable = W1629 # __nonzero__ method defined
+# enable = W1630 # __cmp__ method defined
+# enable = W1632 # input built-in referenced
+# enable = W1633 # round built-in referenced
+# enable = W1634 # intern built-in referenced
+# enable = W1635 # unichr built-in referenced
+# enable = W1636 # map built-in referenced when not iterating
+# enable = W1637 # zip built-in referenced when not iterating
+# enable = W1638 # range built-in referenced when not iterating
+# enable = W1639 # filter built-in referenced when not iterating
+# enable = W1640 # Using the cmp argument for list.sort / sorted
+# enable = W1641 # Implementing __eq__ without also implementing __hash__
+# enable = W1642 # __div__ method defined
+# enable = W1643 # __idiv__ method defined
+# enable = W1644 # __rdiv__ method defined
+# enable = W1645 # Exception.message removed in Python 3
+# enable = W1646 # non-text encoding used in str.decode
+# enable = W1647 # sys.maxint removed in Python 3
+# enable = W1648 # Module moved in Python 3
+# enable = W1649 # Accessing a deprecated function on the string module
+# enable = W1650 # Using str.translate with deprecated deletechars parameters
+# enable = W1651 # Accessing a deprecated function on the itertools module
+# enable = W1652 # Accessing a deprecated fields on the types module
+# enable = W1653 # next method defined
+# enable = W1654 # dict.items referenced when not iterating
+# enable = W1655 # dict.keys referenced when not iterating
+# enable = W1656 # dict.values referenced when not iterating
+# enable = W1657 # Accessing a removed attribute on the operator module
+# enable = W1658 # Accessing a removed attribute on the urllib module
+# enable = W1659 # Accessing a removed xreadlines attribute
+# enable = W1660 # Accessing a removed attribute on the sys module
+# enable = W1661 # Using an exception object that was bound by an except handler
+# enable = W1662 # Using a variable that was bound inside a comprehension
+
+# we disable all of the rules that are not listed above (may be missing some rules that we'll need to add as we go)
+disable =
+  C0102, # Black listed name "%s"
+  C0103, # Invalid %s name "%s"
+  C0111, # Missing %s docstring
+  C0121, # Missing required attribute "%s"
+  C0123, # Using type() instead of isinstance() for a "typecheck."
+  C0202, # Class method %s should have cls as first argument
+  C0203, # Metaclass method %s should have mcs as first argument
+  C0204, # Metaclass class method %s should have %s as first argument
+  C0301, # Line too long (%s/%s)
+  C0302, # Too many lines in module (%s)
+  C0321, # More than one statement on a single line
+  C0325, # Unnecessary parens after %r keyword
+  C0326, # %s space %s %s %s\n%s
+  C0330, # Wrong %s indentation%s%s.\n%s%s
+  C0412, # Imports from package %s are not grouped (ungrouped-imports)
+  C0413, # Import "%s" should be placed at the top of the module
+  C0415, # Import outside toplevel
+  C1001, # Old-style class defined
+  E0011, # Unrecognized file option %r
+  E0100, # __init__ method is a generator
+  E0106, # Return with argument inside generator
+  E0107, # Use of the non-existent %s operator
+  E0202, # An attribute defined in %s line %s hides this method
+  E0213, # Method should have "self" as first argument
+  E0221, # Interface resolved to %s is not a class
+  E0401, # Unable to import
+  E0702, # Raising %s while only classes or instances are allowed
+  E0710, # Raising a new style class which doesn't inherit from BaseException
+  E0712, # Catching an exception which doesn't inherit from Exception: %s
+  E1001, # Use of __slots__ on an old style class
+  E1002, # Use of super on an old style class
+  E1004, # Missing argument to super()
+  E1101, # %s %r has no %r member%s
+  E1120, # No value passed for parameter %s in function call
+  E1125, # Missing mandatory keyword argument %r in %s call
+  E1205, # Too many arguments for logging format string
+  E1300, # Unsupported format character %r (%#02x) at index %d
+  E1301, # Format string ends in middle of conversion specifier
+  E1302, # Mixing named and unnamed conversion specifiers in format string
+  E1303, # Expected mapping for format string, not %s
+  E1310, # Suspicious argument in %s.%s call
+  F0001, # %s (error prevented analysis; message varies)
+  F0002, # %s: %s (unexpected error; message varies)
+  F0003, # ignored builtin module %s
+  F0004, # unexpected inferred value %s
+  F0202, # Unable to check methods signature (%s / %s)
+  F0220, # failed to resolve interfaces implemented by %s (%s)
+  I0001, # Unable to run raw checkers on built-in module %s
+  I0010, # Unable to consider inline option %r
+  I0011, # Locally disabling %s (%s)
+  I0012, # Locally enabling %s
+  I0013, # Ignoring entire file
+  I0020, # Suppressed %s (from line %d)
+  I0021, # Useless suppression of %s
+  native-string,
+  R0201, # Method could be a function
+  R0401, # Cyclic import (%s)
+  R0801, # Similar lines in %s files
+  R0901, # Too many ancestors (%s/%s)
+  R0902, # Too many instance attributes (%s/%s)
+  R0903, # Too few public methods (%s/%s)
+  R0904, # Too many public methods (%s/%s)
+  R0911, # Too many return statements (%s/%s)
+  R0912, # Too many branches (%s/%s)
+  R0913, # Too many arguments (%s/%s)
+  R0914, # Too many local variables (%s/%s)
+  R0915, # Too many statements (%s/%s)
+  R0921, # Abstract class not referenced
+  R0922, # Abstract class is only referenced %s times
+  R0923, # Interface not implemented
+  R1705, # Unnecessary "%s" after "return"
+  R1725: # Consider using Python 3 style super() without arguments
+  RP0001, # Messages by category
+  RP0002, # % errors / warnings by module
+  RP0003, # Messages
+  RP0004, # Global evaluation
+  RP0101, # Statistics by type
+  RP0401, # External dependencies
+  RP0402, # Modules dependencies graph
+  RP0701, # Raw metrics
+  RP0801, # Duplication
+  W0105, # String statement has no effect
+  W0107, # Unnecessary pass statement
+  W0108, # Lambda may not be necessary
+  W0110, # map/filter on lambda could be replaced by comprehension
+  W0120, # Else clause on loop without a break statement
+  W0141, # Used builtin function %s (Used when a blacklisted built-in function is used)
+  W0142, # Used * or ** magic
+  W0150, # %s statement in finally block may swallow exception
+  W0201, # Attribute %r defined outside __init__
+  W0211, # Static method with %r as first argument
+  W0212, # Access to a protected member %s of a client class
+  W0221, # Parameters differ from %s %r method
+  W0222, # Signature differs from %s %r method
+  W0223, # Method %r is abstract in class %r but is not overridden
+  W0231, # __init__ method from base class %r is not called
+  W0232, # Class has no __init__ method
+  W0233, # __init__ method from a non direct base class %r is called
+  W0235, # Useless super delegation
+  W0401, # Wildcard import %s
+  W0403, # Relative import %r, should be %r'
+  W0404, # Reimport %r (imported line %s)
+  W0406, # Module import itself
+  W0511, # %s (Used when a warning note as FIXME or XXX is detected.)
+  W0512, # Cannot decode using encoding "%s", unexpected byte at position %d
+  W0602, # Using global for %r but no assignment is done
+  W0603, # Using the global statement
+  W0604, # Using the global statement at the module level
+  W0611, # Unused admin imported from django.contrib
+  W0612, # Unused variable %r
+  W0613, # Unused argument %r
+  W0614, # Unused import %s from wildcard import
+  W0621, # Redefining name %r from outer scope (line %s)
+  W0622, # Redefining built-in %r
+  W0623, # Redefining name %r from %s in exception handler
+  W0632, # Possible unbalanced tuple unpacking with sequence%s: left side has %d label(s), right side has %d value(s)
+  W0702, # No exception type(s) specified
+  W0703, # Catching too general exception %s
+  W0704, # Except doesn't do anything
+  W0710, # Exception doesn't inherit from standard "Exception" class
+  W0711, # Exception to catch is the result of a binary "%s" operation
+  W1001, # Use of "property" on an old style class
+  W1300, # Format string dictionary key should be a string, not %s
+  W1401, # Anomalous backslash in string: '%s'. String constant might be missing an r prefix.
+  W1402, # Anomalous Unicode escape in byte string: '%s'. String constant might be missing an r or u prefix.
