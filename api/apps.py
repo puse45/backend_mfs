@@ -1,10 +1,10 @@
 from django.apps import AppConfig
 
 
-class BaseConfig(AppConfig):
+class ApiConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "base"
-    verbose_name = "Base Models"
+    name = "api"
+    verbose_name = "API Models"
 
     def ready(self):
-        import base.signals
+        import api.signals

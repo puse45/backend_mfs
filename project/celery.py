@@ -21,17 +21,6 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
 
-# app.conf.beat_schedule = {
-#     "pull-member-status": {
-#         "task": "accounts.tasks.get_Members_Status",
-#         "schedule": crontab(minute="*/1"),
-#     },
-#     "update-member-status-by-channels": {
-#         "task": "accounts.tasks.channel_user_status",
-#         "schedule": crontab(minute="*/1"),
-#     },
-# }
-
 
 @app.task(bind=True)
 def debug_task(self):

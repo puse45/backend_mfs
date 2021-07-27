@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div style="margin-top:80px;">
+        <div style="margin: 0 auto">
+            <h1>{{ heading|title }}</h1>
+            {% if user.is_authenticated %}
+            <h3>Welcome</h3>
+            <p>You're logged as <strong>{{ user.get_full_name }}</strong>.</p>
+            <div class="btn-group" style="margin-top: 2rem">
+                <a href="{% url 'admin:index' %}" class="btn btn-success">Admin</a>  <a href="{% url 'admin:logout' %}" type="button" class="btn btn-primary">Logout</a>
+            </div>
+            {% else %}
+            <br>
+            <p>
+                <a href="{% url 'admin:login' %}" class="btn btn-primary">Login</a>
+            </p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
