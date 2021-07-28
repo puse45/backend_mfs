@@ -37,7 +37,7 @@ class ClosestPointComputeTest(TestCase):
         return ClosestPointCompute.objects.create(points=points)
 
     def test_closest_point_creation(self):
-        cpc = self.create_closest_point_compute()
+        cpc = self.create_closest_point_compute(points=self.points)
         self.assertTrue(isinstance(cpc, ClosestPointCompute))
         self.assertEqual(cpc.points, self.points)
 
