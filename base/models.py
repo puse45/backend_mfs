@@ -17,7 +17,7 @@ class BaseModel(models.Model):
 
 
 class StatusModel(models.Model):
-    is_processing = models.BooleanField(default=False)
+    is_processing = models.BooleanField(default=True)
     is_done = models.BooleanField(default=False)
 
     class Meta:

@@ -1,17 +1,24 @@
+import logging
 import math
 
-# def processor(points: list):
-#     """“(2, 3), (1, 1), (5, 4), ...”"""
-#     new_points = []
-#     for x in range(len(points)):
-#         clean_list = []
-#         for y in points[x]:
-#             clean_list.append(float(y))
-#         new_points.append(tuple(clean_list))
-#     ax = sorted(new_points, key=lambda x: x[0])  # Presorting x-wise
-#     ay = sorted(new_points, key=lambda x: x[1])  # Presorting y-wise
-#     p1, p2, mi = closest_pair(ax, ay)  # Recursive D&C function
-#     return p1, p2, mi
+from pointer.models import ClosestPointCompute
+from project import app
+
+logger = logging.getLogger(__file__)
+
+
+def processor(points: list):
+    """“(2, 3), (1, 1), (5, 4), ...”"""
+    new_points = []
+    for x, point in enumerate(points):
+        clean_list = []
+        for y in point:
+            clean_list.append(float(y))
+        new_points.append(tuple(clean_list))
+    ax = sorted(new_points, key=lambda x: x[0])  # Presorting x-wise
+    ay = sorted(new_points, key=lambda x: x[1])  # Presorting y-wise
+    p1, p2, mi = closest_pair(ax, ay)  # Recursive D&C function
+    return p1, p2, mi
 
 
 def closest_pair(ax, ay):
@@ -93,3 +100,15 @@ def closest_split_pair(p_x, p_y, delta, best_pair):
                 best_pair = p, q
                 best = dst
     return best_pair[0], best_pair[1], best
+
+
+@app.task()
+def close_point_calculator(points, id):
+    try:
+        p1, p2, mi = processor(points=points)
+        payload = {"point A": p1, "point B": p2, "distance between": mi}
+        ClosestPointCompute.objects.filter(pk=id).update(
+            result=payload, is_done=True, is_processing=False
+        )
+    except Exception as e:
+        logger.error("Error sending email {}", e.args)

@@ -1,5 +1,6 @@
 import os
 
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -19,7 +20,7 @@ class ClosestPointBatchCompute(BaseModel, StatusModel):
     csv_file = models.FileField(upload_to=upload_dir, blank=False, null=False)
     column_a = models.CharField(max_length=100, blank=False, null=False)
     column_b = models.CharField(max_length=100, blank=False, null=False)
-    computation_result = models.CharField(max_length=200, blank=False, null=False)
+    result = models.JSONField(default=dict, blank=False, null=False)
     slug = False
 
     def __unicode__(self):
@@ -36,8 +37,8 @@ class ClosestPointBatchCompute(BaseModel, StatusModel):
 
 
 class ClosestPointCompute(BaseModel, StatusModel):
-    points = models.TextField(blank=False, null=False)
-    computation_result = models.CharField(max_length=200, blank=False, null=False)
+    points = ArrayField(ArrayField(models.FloatField(null=False, blank=False)))
+    result = models.JSONField(default=dict, blank=False, null=False)
     slug = False
 
     def __unicode__(self):
