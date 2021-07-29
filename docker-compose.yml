@@ -14,7 +14,9 @@ services:
     networks:
       - mfs_network
     env_file:
-      - ./.env.dev
+      - ./.env.prod
+    depends_on:
+      - database
 
   nginx_mfs:
     image: nginx:latest
@@ -22,7 +24,7 @@ services:
     container_name: nginx_mfs
     ports:
       - 443:443
-      - 80:80
+      - 81:80
     volumes:
       - ./config/nginx/conf.d/:/etc/nginx/conf.d/
       - ./config/nginx/ssl/mfs_africa.crt:/etc/nginx/mfs_africa.crt
@@ -36,14 +38,14 @@ services:
       - mfs_network
 
   redis:
-    image: redis
+    image: redis:latest
     container_name: redis_mfs
     restart: on-failure
     networks:
       - mfs_network
 
   database:
-      image: postgres:12
+      image: postgres:10.1-alpine
       container_name: db_mfs
       networks:
         - mfs_network
@@ -53,15 +55,14 @@ services:
         - POSTGRES_DB=mfs_africa_db
         - POSTGRES_USER=root
         - POSTGRES_PASSWORD=your_password
-      restart: on-failure
-
+      restart: unless-stopped
 
   celery:
     image: *backend
     container_name: celery_mfs
     restart: on-failure
     env_file:
-      - ./.env.dev
+      - ./.env.prod
     command: ./wait-for-it.sh redis:8000 -- celery -A project worker -l info
     volumes:
       - .:/celery_volume
@@ -69,7 +70,7 @@ services:
       - mfs_network
     depends_on:
       - backend
-      - redis_cts
+      - redis
 
 
 networks:

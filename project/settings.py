@@ -225,21 +225,6 @@ MAX_UPLOAD_SIZE = 1024 * 1024 * 20
 AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 
 
-# Channels
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [
-                (
-                    config("CHANNELS_BROKER_URL", default="0.0.0.0"),
-                    config("REDIS_PORT", default=6379),
-                )
-            ]
-        },
-    },
-}
-
 # Celery application definition
 CELERY_BROKER_URL = config("CELERY_BROKER_URL", default="redis://localhost:6379/8")
 CELERY_RESULT_BACKEND = config(

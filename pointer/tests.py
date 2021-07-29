@@ -1,32 +1,12 @@
-import csv
 import json
-import random
-from collections import defaultdict
 
 from django.test import TestCase
 from rest_framework import status
-from rest_framework.test import APIClient, APIRequestFactory, APITestCase
+from rest_framework.test import APIClient, APITestCase
 
-# Create your tests here.
 from pointer.models import ClosestPointCompute
 
-
-def test_case(length: int = 10000):
-    lst1 = [random.randint(-(10 ** 9), 10 ** 9) for i in range(length)]
-    lst2 = [random.randint(-(10 ** 9), 10 ** 9) for i in range(length)]
-    return lst1, lst2
-
-
-def test_case2(path):
-    columns = defaultdict(list)  # each value in each column is appended to a list
-
-    with open(path) as f:
-        reader = csv.DictReader(f)  # read rows into a dictionary format
-        for row in reader:  # read a row as {column1: value1, column2: value2,...}
-            for (k, v) in row.items():  # go over each column name and value
-                columns[k].append(v)  # append the value into the appropriate list
-
-    return columns["lat"], columns["lng"]
+# Create your tests here.
 
 
 # models test
@@ -46,7 +26,7 @@ class ClosestPointComputeTest(TestCase):
 class ViewsClosestPointComputeTestCase(TestCase):
     def test_closest_point_compute(self):
         """Closest point compute"""
-        response = self.client.get("http://localhost:8000/api/points/")
+        response = self.client.get("/api/points/")
         self.assertEqual(response.status_code, 200)
 
 
@@ -55,13 +35,13 @@ class ViewsClosestPointComputePostTestCase(APITestCase):
     def test_closest_point_compute_create(self):
         """Closest point compute create"""
         payload = {"points": [[2.5, 3.1], [1.6, 1.999], [5, 4], [5, 4]]}
-        expected_result = {
-            "point A": [5, 4],
-            "point B": [5, 4],
-            "distance between": 0.0,
-        }
+        expected_result = {"point A": [5.0, 4.0], "point B": [5.0, 4.0]}
+
         response = self.client.post("/api/points/", payload, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(ClosestPointCompute.objects.count(), 1)
         self.assertEqual(ClosestPointCompute.objects.get().points, payload["points"])
-        self.assertEqual(ClosestPointCompute.objects.get().result, expected_result)
+        self.assertEqual(
+            ClosestPointCompute.objects.get().result.get("closest points"),
+            expected_result,
+        )

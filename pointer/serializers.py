@@ -21,7 +21,10 @@ class ClosestPointComputeSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         p1, p2, mi = processor(points=validated_data.get("points"))
-        payload = {"point A": p1, "point B": p2, "distance between": mi}
+        payload = {
+            "closest points": {"point A": p1, "point B": p2},
+            "distance between": mi,
+        }
         validated_data["result"] = payload
         validated_data["is_processing"] = False
         validated_data["is_done"] = True
