@@ -24,7 +24,7 @@ services:
     container_name: nginx_mfs
     ports:
       - 443:443
-      - 81:80
+      - 80:80
     volumes:
       - ./config/nginx/conf.d/:/etc/nginx/conf.d/
       - ./config/nginx/ssl/mfs_africa.crt:/etc/nginx/mfs_africa.crt
