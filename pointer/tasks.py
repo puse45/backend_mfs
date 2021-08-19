@@ -8,6 +8,10 @@ logger = logging.getLogger(__file__)
 
 
 def processor(points: list):
+    """
+    :param points:
+    :return: p1, p2, mi
+    """
     """ preprocessing method """
     """“(2, 3), (1, 1), (5, 4), ...”"""
     new_points = []

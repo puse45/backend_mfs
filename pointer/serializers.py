@@ -20,7 +20,9 @@ class ClosestPointComputeSerializer(serializers.ModelSerializer):
         read_only_fields = ["result", "is_processing", "is_done"]
 
     def create(self, validated_data):
+        """On save points are submitted to be processed via processor method"""
         p1, p2, mi = processor(points=validated_data.get("points"))
+
         payload = {
             "closest points": {"point A": p1, "point B": p2},
             "distance between": mi,

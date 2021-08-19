@@ -14,7 +14,7 @@ from pointer.tasks import close_point_calculator
 
 logger = logging.getLogger(__file__)
 
-
+# View Class to handle request to calculate closest points
 class ClosestPointsView(generics.GenericAPIView):
     queryset = ClosestPointCompute.objects.all()
     serializer_class = ClosestPointComputeSerializer
@@ -23,6 +23,7 @@ class ClosestPointsView(generics.GenericAPIView):
     filterset_fields = ("id",)
 
     def post(self, request, *args, **kwargs):
+        """ Submitted list of points """
         try:
             serializer = self.serializer_class(
                 data=request.data, context=self.get_serializer_context
@@ -36,9 +37,11 @@ class ClosestPointsView(generics.GenericAPIView):
             return Response(e.args, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, *args, **kwargs):
+        """Returns all submitted points and their respective results after computation"""
         try:
             queryset = self.get_queryset()
             if request.GET.get("id"):
+                """Returns object by id of points created"""
                 queryset = self.get_queryset().filter(pk=request.GET.get("id"))
             serializer = self.serializer_class(queryset, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
