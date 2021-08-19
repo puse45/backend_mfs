@@ -34,13 +34,10 @@ SECRET_KEY = config(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", False, cast=bool)
 
-if DEBUG:
-    ALLOWED_HOSTS = ["*"]
 
-else:
-    ALLOWED_HOSTS = config(
-        "ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(",")]
-    )
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(",")]
+)
 
 # Application definition
 
